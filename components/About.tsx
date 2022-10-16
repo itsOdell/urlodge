@@ -1,10 +1,13 @@
 import styles from "../styles/About.module.css";
+import Image from "next/image"
 import FeatureComponent from "../components/Feature"
-import {User} from "../icons/";
+import { features } from "../data";
+import type { FeatureProps } from "../types";
 
 const AboutComponent: React.FC = (): React.ReactElement => {
     return (
         <article id="About" className={styles.about}>
+            <img src="/assets/top_left_blob.png" className={styles.blob}/>
             <div className={`container ${styles.about_container}`}>
 
                 <header className={styles.about_header}>
@@ -15,12 +18,14 @@ const AboutComponent: React.FC = (): React.ReactElement => {
                 </header>
 
                 <div className={styles.about_features}>
-                    <FeatureComponent title={"Feature"} description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit nemo amet eum cum aliquid ratione."} Icon={() => <User size="3x" color={"#52BF90"}/>}/>
-                    <FeatureComponent title={"Feature"} description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit nemo amet eum cum aliquid ratione."} Icon={() => <User size="3x" color={"#52BF90"}/>}/>
-                    <FeatureComponent title={"Feature"} description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit nemo amet eum cum aliquid ratione."} Icon={() => <User size="3x" color={"#52BF90"}/>}/>
-                    <FeatureComponent title={"Feature"} description={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit nemo amet eum cum aliquid ratione."} Icon={() => <User size="3x" color={"#52BF90"}/>}/>
+                    {features.map((feature: FeatureProps) => {
+                        return (
+                            <FeatureComponent {...feature}/>
+                        )
+                    })}
                 </div>
             </div> 
+            <img src="/assets/top_right_blob.png" className={styles.blob}/>
         </article>
     )
 }

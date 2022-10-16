@@ -6,6 +6,6 @@ export const useScroll = (): number => {
         window.addEventListener("scroll", function(): void {
             setScrolled(window.pageYOffset)
         })
-    }, [scrolled])
+    }, [])
     return scrolled;
 }

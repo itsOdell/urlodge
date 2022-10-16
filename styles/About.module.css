@@ -1,9 +1,10 @@
 .about {
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .about_container {
     display: flex;
@@ -54,4 +55,19 @@
         grid-template-rows: repeat(2, 1fr); 
         grid-column-gap: 30px;
         grid-row-gap: 35px; 
+        margin-top: 50px;
+}
+
+.blob{
+    max-width: 400px;
+    max-height: 400px;
+    position: absolute;
+}
+.blob:nth-of-type(1){
+    top: -5px;
+    left: 0;
+}
+.blob:nth-of-type(2){
+    right: 0;
+    bottom: -10px;
 }

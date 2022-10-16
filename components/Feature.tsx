@@ -1,11 +1,5 @@
 import styles from "../styles/Feature.module.css"
-import parentStyles from "../styles/About.module.css"
-
-interface FeatureProps {
-    Icon: string | React.ElementType,
-    title: string,
-    description: string
-}
+import { FeatureProps } from "../types";
 
 const FeatureComponent: React.FC<FeatureProps> = ({Icon, title, description}): React.ReactElement => {
     return (
