@@ -1,0 +1,26 @@
+.feature {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.icon_container {
+    background-color: var(--opaque-green);
+    padding: 5px;
+    border-radius: 7px;
+    margin: 0;
+}
+.title_container h2 {
+    font-size: 27px;
+    margin: 15px 0 5px 0;
+    letter-spacing: .7px;
+}
+.description_container p {
+    font-size: 16px;
+    color: var(--opaque-black);
+    margin: 0;
+    line-height: 1.25;
+    word-spacing: .5px;
+    letter-spacing: .5px;
+}

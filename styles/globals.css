@@ -2,6 +2,9 @@
   --light-green: #52BF90;
   --dark-green: #49AB81;
   --dark-background: #1E1E1E;
+  --opaque-green: rgba(82, 191, 144, .3);
+  --opaque-black: rgba(0,0,0,0.85);
+  --opaque-white: rgba(255,255,255,0.85);
 }
 html, body {
   padding: 0;

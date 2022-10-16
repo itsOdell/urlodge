@@ -33,7 +33,7 @@
 }
 
 .home_header h2 {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--opaque-white);
   font-size: 21px;
   font-weight: 500;
   letter-spacing: .9px;
