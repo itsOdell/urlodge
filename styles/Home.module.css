@@ -52,11 +52,8 @@
 .home_buttons_container > button {
   font-size: 20px;
   width: 47%;
-  font-eight: 500;
-  cursor: pointer;
+  font-weight: 500;
   padding: 15px 0;
-  border-radius: 7px;
-  transition: all 0.2s ease;
   border: 2px solid var(--dark-green);
 }
 
@@ -64,11 +61,21 @@
   background-color: var(--dark-green);
   color: white;
 }
+.home_buttons_container > button:first-child:hover {
+  background-color: var(--light-green);
+}
 
 .home_buttons_container > button:last-child {
   background-color: transparent;
   color: var(--dark-green);
 }
+
+.home_buttons_container > button:last-child:hover {
+  background-color: white;
+  border-color: white;
+  color: var(--light-green);
+}
+
 
 .home_achievements {
   display: flex;
