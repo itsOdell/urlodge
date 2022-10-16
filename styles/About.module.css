@@ -64,10 +64,10 @@
     position: absolute;
 }
 .blob:nth-of-type(1){
-    top: -5px;
+    top: 15px;
     left: 0;
 }
 .blob:nth-of-type(2){
     right: 0;
-    bottom: -10px;
+    bottom: 10px;
 }
