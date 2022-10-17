@@ -6,7 +6,7 @@ import type { FeatureProps } from "../types";
 
 const AboutComponent: React.FC = (): React.ReactElement => {
     return (
-        <article id="About" className={styles.about}>
+        <section id="About" className={styles.about}>
             <img src="/assets/top_left_blob.png" className={styles.blob}/>
             <div className={`container ${styles.about_container}`}>
 
@@ -26,7 +26,7 @@ const AboutComponent: React.FC = (): React.ReactElement => {
                 </div>
             </div> 
             <img src="/assets/top_right_blob.png" className={styles.blob}/>
-        </article>
+        </section>
     )
 }
 

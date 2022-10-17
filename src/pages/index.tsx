@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import HomeComponent from '../components/Home'
 import NavbarComponent from '../components/Navbar'
 import AboutComponent from '../components/About'
+import ReviewsComponent from '../components/Reviews'
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
       <NavbarComponent />
       <HomeComponent />
       <AboutComponent />
+      <ReviewsComponent/>
     </div>
   )
 }

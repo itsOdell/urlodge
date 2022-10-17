@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/media.css'
 import { SessionProvider } from "next-auth/react"
 import type {Session} from"next-auth"
 import type { AppProps } from 'next/app'

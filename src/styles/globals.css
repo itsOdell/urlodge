@@ -25,6 +25,10 @@ button {
   border: none;
   border-radius: 7px;
 }
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
 .container {
   max-width: 90%;
   width: 85%;
