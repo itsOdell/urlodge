@@ -1,6 +1,6 @@
 .about {
     width: 100%;
-    min-height: 80vh;
+    min-height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,6 +12,7 @@
     align-items: center;
     flex-wrap: wrap;
     color: black;
+    margin: 50px 0;
 }
 .about_header {
     width: 450px;
