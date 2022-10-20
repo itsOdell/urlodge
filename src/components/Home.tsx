@@ -8,7 +8,6 @@ const HomeComponent: React.FC = (): React.ReactElement => {
     return (
         <main id={"Home"} className={`${styles.home}`}>
             <div className={`container ${styles.home_container}`}>
-
                 <header className={styles.home_header}>
                     <h1>ALL IN ONE <br />SELF PROMOTION</h1>
                      <h2>Share all your links, URL and URIs here with this

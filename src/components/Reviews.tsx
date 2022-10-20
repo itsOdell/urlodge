@@ -1,13 +1,14 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from "../styles/Reviews.module.css";
 import ReviewComponent from "./Review";
 import { ReviewProp } from "../types";
 import {reviews} from "../data";
-import {useWidth} from "../hooks";
-import ReviewsSwipeComponent from "./ReviewsSwipe";
 
-const ReviewsComponent: React.FC = (): React.ReactElement => {
-    const width = useWidth();
-    const onMobile: boolean = width > 100 ? false : true;
+interface ReviewsComponentProp { 
+    onMobile: boolean
+}
+
+const ReviewsComponent: React.FC<ReviewsComponentProp> = ({onMobile}): React.ReactElement => {
     return (
         <section className={styles.reviews} id="Reviews">
             <img src="/assets/middle_left_blob.png" alt="" className={styles.blob}/>
@@ -20,8 +21,10 @@ const ReviewsComponent: React.FC = (): React.ReactElement => {
 
                 <div className={styles.reviews_reviews}>
                     {onMobile ? 
-                        reviews.map((review: ReviewProp) => <ReviewComponent {...review}/>) : 
-                        <ReviewsSwipeComponent reviews={reviews}/>
+                        <Swiper centeredSlides={true} pagination={true} >
+                            {reviews.map((review: ReviewProp) => <SwiperSlide key={review.key}><ReviewComponent {...review} /></SwiperSlide>)}
+                        </Swiper> :
+                        reviews.map((review: ReviewProp) => <ReviewComponent {...review}/>)
                     }
                 </div>
 

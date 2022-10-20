@@ -1,5 +1,4 @@
 import styles from "../styles/About.module.css";
-import Image from "next/image"
 import FeatureComponent from "../components/Feature"
 import { features } from "../data";
 import type { FeatureProps } from "../types";

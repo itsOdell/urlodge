@@ -1,0 +1,44 @@
+.plans {
+    width: 100%;
+    min-height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.plans_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0;
+}
+.plans_header {
+    font-size: 30px;
+    margin-bottom: 0;
+    letter-spacing: .6px;
+    word-spacing: 3px;
+    color: black;
+}
+.plans_plans {
+    width: 100%;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    margin: 20px 0;
+}
+
+.blob {
+    position: absolute;
+    z-index: -1;
+}
+.blob:nth-of-type(1) {
+    left: 0;
+    top: 5px;
+}
+.blob:nth-of-type(2) {
+    right: 0;
+    bottom: 5px;
+}

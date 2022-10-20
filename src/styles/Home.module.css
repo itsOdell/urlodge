@@ -11,9 +11,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 9rem;
+  padding-top: 11rem;
   flex-wrap: wrap;
-  /* margin-bottom: 3rem; */
 }
 
 .home_header {
@@ -82,7 +81,7 @@
   flex-direction: row;
   word-spacing: 1px;
   font-size: 18.5px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .home_achievements p:first-child {
   margin-right: auto;

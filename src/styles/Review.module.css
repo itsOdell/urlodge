@@ -4,7 +4,8 @@
     background-color: var(--light-green);
     position: relative;
     max-width: 270px;
-    width: 270px;
+    min-width: 270px;
+    margin: 0 15px;
     height: 370px;
     max-height: 370px;
     display: flex;

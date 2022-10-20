@@ -22,8 +22,8 @@ const NavbarComponent: React.FC = (): React.ReactElement => {
                     <Link href={"#Reviews"}>
                         <a>Reviews</a>
                     </Link>
-                    <Link href={"#Pricing"}>
-                        <a>Pricing</a>
+                    <Link href={"#Plans"}>
+                        <a>Plans</a>
                     </Link>
                 </div>
                 <div className={`${styles.nav_right}`}>
