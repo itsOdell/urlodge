@@ -1,5 +1,5 @@
 import styles from "../styles/About.module.css";
-import FeatureComponent from "../components/Feature"
+import FeatureComponent from "../components/Feature";
 import { features } from "../data";
 import type { FeatureProps } from "../types";
 
