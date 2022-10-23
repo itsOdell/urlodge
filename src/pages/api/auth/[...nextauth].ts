@@ -1,11 +1,14 @@
 import NextAuth, { Awaitable, NextAuthOptions, RequestInternal, User } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
+import {PrismaAdapter} from "@next-auth/prisma-adapter";
+import prisma from "../../../lib/prisma"
 
 export const authOptions: NextAuthOptions = {
-  session: {
-    strategy: "jwt"
-  },
+  // session: {
+  //   strategy: "jwt"
+  // },
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       type: "credentials",
