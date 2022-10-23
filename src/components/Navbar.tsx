@@ -27,7 +27,7 @@ const NavbarComponent: React.FC = (): React.ReactElement => {
                     </Link>
                 </div>
                 <div className={`${styles.nav_right}`}>
-                    <Link href={"/login"} passHref>
+                    <Link href={"/signin"} passHref>
                         <a>
                             <User size={"2x"} />
                         </a>

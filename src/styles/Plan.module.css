@@ -68,7 +68,7 @@
 }
 
 .plan_button {
-    border: 1.5px solid var(--light-green);
+    border: 2px solid var(--dark-green);
     border-radius: 7px;
     width: 100%;
     padding: 13px 0;

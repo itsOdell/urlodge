@@ -19,7 +19,7 @@ const PlanComponent: React.FC<PlanProp> = ({title, subTitle, price, features}): 
                 {features.map((feature: string, i: number) => {
                     return (
                         <li key={i}>
-                            <Check size={"2x"} color="#48ab81"/>
+                            <Check size={"2x"} color={"var(--dark-green)"}/>
                             <p>{feature}</p>
                         </li>
                     )
