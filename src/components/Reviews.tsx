@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from "../styles/Reviews.module.css";
 import ReviewComponent from "./Review";
-import { ReviewProp } from "../types";
-import {reviews} from "../data";
+import { ReviewProp } from "../shared/types";
+import {reviews} from "../shared/data";
 
 interface ReviewsComponentProp { 
     onMobile: boolean

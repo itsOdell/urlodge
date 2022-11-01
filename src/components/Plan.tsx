@@ -1,6 +1,6 @@
 import styles from "../styles/Plan.module.css";
-import {Check} from "../icons";
-import {PlanProp} from "../types"
+import {Check} from "./icons";
+import {PlanProp} from "../shared/types"
 
 const PlanComponent: React.FC<PlanProp> = ({title, subTitle, price, features}): React.ReactElement => {
     return (

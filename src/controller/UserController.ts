@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma";
+import prisma from "../prisma/prisma";
 
 export class GetFirstUser {
     constructor(private id: string) {

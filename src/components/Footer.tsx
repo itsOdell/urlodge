@@ -1,5 +1,5 @@
 import styles from "../styles/Footer.module.css";
-import {Github} from"../icons"
+import {Github} from"./icons"
 import Link from "next/link";
 
 const FooterComponent: React.FC = (): React.ReactElement => {

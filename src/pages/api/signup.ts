@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from "../../lib/prisma"
+import prisma from "../../prisma/prisma"
 import bcrypt from "bcryptjs"
 import {User, Prisma} from "@prisma/client"
-import {errorCodes} from "../../data/"
+import {errorCodes} from "../../shared/data"
 
 type Data = string
 
@@ -29,7 +29,7 @@ export default async function handler(
         
     } catch (error: unknown) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            res.json(JSON.stringify({error: errorCodes[error.code], status: 401, ok: false, url: null}))
+            res.json(JSON.stringify({error: errorCodes[error.code] || error.message, status: 401, ok: false, url: null}))
         }
     }
 }

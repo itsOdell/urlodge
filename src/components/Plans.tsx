@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from "../styles/Plans.module.css"
 import PlanComponent from "./Plan";
-import {plans} from "../data";
-import { PlanProp } from "../types";
+import {plans} from "../shared/data";
+import { PlanProp } from "../shared/types";
 
 interface PlansComponentProp { 
     onMobile: boolean

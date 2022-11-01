@@ -1,6 +1,6 @@
 import styles from "../styles/Review.module.css"
-import { Quote } from "../icons";
-import { ReviewProp } from "../types";
+import { Quote } from "./icons";
+import { ReviewProp } from "../shared/types";
 
 const ReviewComponent: React.FC<ReviewProp> = ({image, name, comment}): React.ReactElement => {
     // fix sttrucure

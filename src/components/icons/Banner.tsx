@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBookmark} from "@fortawesome/free-solid-svg-icons"
-import { IconProps } from '../types'
+import { IconProps } from '../../shared/types'
 
 
 export const Banner: React.FC<IconProps> = ({size, color}): React.ReactElement => {

@@ -1,5 +1,5 @@
 import styles from "../styles/Feature.module.css"
-import { FeatureProps } from "../types";
+import { FeatureProps } from "../shared/types";
 
 const FeatureComponent: React.FC<FeatureProps> = ({Icon, title, description}): React.ReactElement => {
     return (

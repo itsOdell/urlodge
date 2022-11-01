@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {useWidth} from "../hooks";
+import {useWidth} from "../shared/hooks";
 import styles from '../styles/Home.module.css'
 import HomeComponent from '../components/Home'
 import NavbarComponent from '../components/Navbar'

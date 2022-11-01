@@ -1,7 +1,7 @@
 import styles from "../styles/About.module.css";
 import FeatureComponent from "../components/Feature";
-import { features } from "../data";
-import type { FeatureProps } from "../types";
+import { features } from "../shared/data";
+import type { FeatureProps } from "../shared/types";
 
 const AboutComponent: React.FC = (): React.ReactElement => {
     return (

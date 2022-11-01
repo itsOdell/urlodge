@@ -1,9 +1,9 @@
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import {providerIcons} from "../data"
+import {providerIcons} from "../shared/data"
 import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/SignIn.module.css";
-import {ProviderProp} from "../types"
+import {ProviderProp} from "../shared/types"
 import ErrorComponent from "./Error";
 import { useRouter } from "next/router";
 

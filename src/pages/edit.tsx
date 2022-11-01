@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {useWidth} from "../hooks";
+import {useWidth} from "../shared/hooks";
 
 const Edit: NextPage = () => {
   const width = useWidth();

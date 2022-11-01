@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { getProviders } from "next-auth/react"
 import SignInComponent from "../components/SignIn"
-import type {ProviderProp} from "../types"
+import type {ProviderProp} from "../shared/types"
 
 const SignIn: NextPage<ProviderProp> = ({ providers }) => {
   return (

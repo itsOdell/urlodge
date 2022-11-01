@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faGithubSquare} from "@fortawesome/free-brands-svg-icons"
-import { IconProps } from '../types'
+import { IconProps } from '../../shared/types'
 
 
 export const Github: React.FC<IconProps> = ({size, color}): React.ReactElement => {

@@ -4,7 +4,7 @@ import type { User } from "@prisma/client"
 import bcrypt from "bcryptjs"
 import CredentialsProvider from "next-auth/providers/credentials"
 import {PrismaAdapter} from "@next-auth/prisma-adapter";
-import prisma from "../../../lib/prisma"
+import prisma from "../../../prisma/prisma"
 import { JWT } from "next-auth/jwt";
 
 

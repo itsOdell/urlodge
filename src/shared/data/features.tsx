@@ -1,5 +1,5 @@
 import { FeatureProps } from "../types";
-import {Link, Avatar, Banner, Free} from "../icons";
+import {Link, Avatar, Banner, Free} from "../../components/icons";
 
 export const features: [FeatureProps, FeatureProps, FeatureProps, FeatureProps] = [
     {

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUserNinja} from "@fortawesome/free-solid-svg-icons"
-import { IconProps } from '../types'
+import { IconProps } from '../../shared/types'
 
 
 export const Avatar: React.FC<IconProps> = ({size, color}): React.ReactElement => {

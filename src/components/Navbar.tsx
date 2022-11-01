@@ -1,8 +1,8 @@
-import {useScroll} from "../hooks";
+import {useScroll} from "../shared/hooks";
 import Link from "next/link"
 import styles from  "../styles/Navbar.module.css"
 import Image from "next/image";
-import {User} from "../icons"
+import {User} from "./icons"
 import {useSession} from "next-auth/react";
 
 const NavbarComponent: React.FC = (): React.ReactElement => {
