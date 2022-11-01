@@ -6,6 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import {PrismaAdapter} from "@next-auth/prisma-adapter";
 import prisma from "../../../prisma/prisma"
 import { JWT } from "next-auth/jwt";
+import {findFirst} from "src/controller/UserController";
 
 
 export const authOptions: NextAuthOptions = {
@@ -19,12 +20,8 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       authorize: async function (credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "headers" | "body" | "query" | "method">) {
         const {email, password} = credentials as {email: string, password: string};
-        let user: User | null = await prisma.user.findFirst({ 
-          where: {
-            email: email
-          }
-        })
-
+        let user = await findFirst("email", email)
+        
         if (user) {
           let passwordCompares: boolean = await bcrypt.compare(password, String(user.password));
           if (passwordCompares) {
@@ -32,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           }
             throw new Error("Password does not match");
         }
-        throw new Error("User does nor exist");
+        throw new Error("User does not exist");
       }
     }),
     // GoogleProvider({

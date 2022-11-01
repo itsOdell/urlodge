@@ -121,6 +121,10 @@
   text-underline-offset: 5px;
   cursor: pointer;
 }
+.signin_buttons_container button:disabled {
+  cursor: default;
+  background-color: var(--dark-green);
+}
 
 @media (max-width: 500px) {
 }

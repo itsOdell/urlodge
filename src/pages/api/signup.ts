@@ -1,9 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from "../../prisma/prisma"
+// import prisma from "../../prisma/prisma"
 import bcrypt from "bcryptjs"
-import {User, Prisma} from "@prisma/client"
+import {Prisma} from "@prisma/client"
 import {errorCodes} from "../../shared/data"
+import { createUser } from 'src/controller/UserController'
 
 type Data = string
 
@@ -15,13 +16,7 @@ export default async function handler(
         const {linkTag, email, password} = req.body;
         const hashedPass = await bcrypt.hash(password, Number(process.env.SALT))
         if (req.method === "POST") {
-           let user: User = await prisma.user.create({
-                data: {
-                    linkTag: linkTag,
-                    email: email,
-                    password: hashedPass
-                }
-            })
+            let user = await createUser(linkTag, email, hashedPass)
             if (user) {
                 res.json(JSON.stringify({id: user.id, image: user.image, status: 200, ok: true, url: "/signin"}))
             }

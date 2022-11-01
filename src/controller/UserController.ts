@@ -1,38 +1,22 @@
+import { User } from "@prisma/client";
 import prisma from "../prisma/prisma";
 
-export class GetFirstUser {
-    constructor(private id: string) {
-        this.id = id;
-    }
-    async execute() {
-        return await prisma.user.findFirst({
-            where: {
-                id: this.id
-            }
-        })
-    }
+export async function createUser(linkTag: string, email: string, hashedPass: string): Promise<User> {
+    let user: User = await prisma.user.create({
+        data: {
+            linkTag: linkTag,
+            email: email,
+            password: hashedPass
+        }
+    })
+    return user
 }
 
-export class GetAllUsers {
-    async execute() {
-        return await prisma.user.findMany()
-    }
-}
-
-export class UpdateUser {
-    constructor(private id: string, private toUpdate: {target: "name" | "image" | "email", update: string}) {
-        this.id = id;
-        this.toUpdate = toUpdate;
-    }
-
-    async execute() {
-        return await prisma.user.update({
-            where: {
-                id: this.id
-            },
-            data: {
-                [this.toUpdate.target]: this.toUpdate.update
-            }
-        })
-    }
+export async function findFirst(type: string, target: string): Promise<User | null> {
+    let user: User | null = await prisma.user.findFirst({ 
+        where: {
+          [type]: target
+        }
+      })
+    return user
 }
