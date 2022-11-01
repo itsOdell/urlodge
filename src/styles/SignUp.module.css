@@ -1,4 +1,4 @@
-.signin {
+.signup {
   background-image: url("/assets/signin_background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,7 +9,7 @@
   position: relative;
   overflow: hidden;
 }
-.signin_left {
+.signup_left {
   width: 800px;
   max-width: 100%;
   max-height: 100vh;
@@ -19,20 +19,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  position: relative;
 }
-.signin_left form {
+.signup_left form {
   width: 370px;
 }
 
-.signin_left header {
+.signup_left header {
   margin-bottom: 20px;
 }
-.signin_left header h1 {
+.signup_left header h1 {
   margin: 0;
   font-size: 40px;
   font-weight: 500;
 }
-.signin_left header p {
+.signup_left header p {
   margin-top: 4px;
   font-size: 21px;
   font-weight: 400;
@@ -40,40 +42,40 @@
   letter-spacing: 0.7px;
   word-spacing: 1px;
 }
-.signin_input_container {
+.signup_input_container {
   display: flex;
   flex-direction: column;
   font-size: 19px;
   letter-spacing: 0.3px;
   margin-bottom: 15px;
 }
-.signin_input_container label {
+.signup_input_container label {
   color: rgba(0, 0, 0, 0.85);
 }
 
-.signin_input_container input {
+.signup_input_container input {
   font-size: 17px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 7px;
   padding: 14px 10px;
   margin-top: 4px;
 }
-.signin_buttons_container button {
+.signup_buttons_container button {
   width: 100%;
   font-size: 20px;
-  /* padding: 12px; */
+  /* padding: 1px 0; */
 }
-.signin_buttons_container button:first-child {
+.signup_buttons_container button:first-child {
   background-color: var(--dark-green);
   transition: all 0.2s ease;
   color: white;
   margin-top: 13px;
   padding: 15px 0;
 }
-.signin_buttons_container button:first-child:hover {
+.signup_buttons_container button:first-child:hover {
   background-color: var(--light-green);
 }
-.signin_buttons_container button:last-child {
+.signup_buttons_container button:last-child {
   margin-top: 15px;
   background-color: transparent;
   transition: all 0.2s ease;
@@ -81,14 +83,14 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.signin_buttons_container button:first-child {
+.signup_buttons_container button:first-child {
   background-color: var(--dark-green);
   transition: all 0.2s ease;
   color: white;
   margin-top: 13px;
 }
 
-.signin_signup {
+.signup_signup {
   text-align: center;
   font-weight: 400;
   font-size: 17px;
@@ -107,14 +109,14 @@
 .google img {
   margin-right: 15px;
 }
-.signin_signup p {
+.signup_signup p {
   margin-top: 25px;
   color: var(--opaque-black);
   font-weight: 500;
   font-size: 18px;
 }
 
-.signin_signup span {
+.signup_signup span {
   color: var(--light-green);
   font-weight: 500;
   text-decoration: underline;

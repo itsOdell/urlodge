@@ -14,7 +14,7 @@ const PlansComponent: React.FC<PlansComponentProp> = ({onMobile}): React.ReactEl
             <img src="/assets/bottom_left_blob.png" alt="" className={styles.blob}/>
             <div className={`container ${styles.plans_container}`}>
                 <header className={styles.plans_header}>
-                    <h1>Find what fits for you</h1>
+                    <h1>Find what fits for <span>you</span></h1>
                 </header>
                 <div className={styles.plans_plans}>
                     {onMobile ? 

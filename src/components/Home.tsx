@@ -4,7 +4,6 @@ import {useSession} from "next-auth/react";
 
 const HomeComponent: React.FC = (): React.ReactElement => {
     const {data: session} = useSession();
-    console.log(session);
     return (
         <main id={"Home"} className={`${styles.home}`}>
             <div className={`container ${styles.home_container}`}>
@@ -24,9 +23,9 @@ const HomeComponent: React.FC = (): React.ReactElement => {
                     </div>
                 </header>
 
-                <div className={styles.home_image}>
+                {/* <div className={styles.home_image}>
                     <Img src={"/assets/hero_house.png"} alt={"hero house"} width="630" height="485"/>
-                </div>
+                </div> */}
             </div>
         </main>
     );

@@ -16,7 +16,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProp> = ({onMobile}): React.Rea
 
                 <header className={styles.reviews_header}>
                     <h1>Join the world leading<br/>organization today!</h1>
-                    <p>ok i pull up hop out the after party</p>
+                    <p>Here are some of our reviews</p>
                 </header>
 
                 <div className={styles.reviews_reviews}>
