@@ -1,49 +1,36 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/SignUp.module.css";
-import axios from "axios";
 import { useRouter } from "next/router";
 import ErrorComponent from "./Error";
+import { credSignup, btnLoadingAnimation } from "src/shared/utils/utils";
 
 const SignUpComponent: React.FC = (): React.ReactElement => {
     const {data:session} = useSession()
     console.log(session)
     const router = useRouter();
     const button = useRef(null)
-        let [errorText, setErrorText] = useState<string>("")
-        let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({
-            linkTag: "",
-            email: "",
-            password: "",
-        })
+    let [errorText, setErrorText] = useState<string>("")
+    let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({ linkTag: "", email: "", password: ""})
         
-        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-            setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
-    }
-
-    const btnLoadingAnimation = (text: string, disabled: boolean): void => {
-        let buttonEl = (button.current as unknown as HTMLButtonElement);
-        buttonEl.innerText = text;
-        buttonEl.disabled = disabled;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
     }
     
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
-        btnLoadingAnimation("loading", true)
+        btnLoadingAnimation(button, "loading", true)
         try {
-            let res = await axios.post("/api/signup", authCredits)
-            let data = JSON.parse(res.data)
-            console.log(data)
-            if (data?.ok === false) {
-                throw(data)
-            }
-            router.push(data.url)
-        } catch (error: any) {
-            console.log(error)
-            setErrorText(error?.error)
+            let signUpRes = await credSignup(authCredits)
+            console.log(signUpRes)
+            setErrorText("")
+            router.push(signUpRes.url)
+        } catch (e: any) {
+            console.log(e)
+            setErrorText(e.error)
         } finally {
-            btnLoadingAnimation("Sign up", false)
+            btnLoadingAnimation(button, "Sign up", false)
         }
     }
     

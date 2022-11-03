@@ -1,11 +1,12 @@
-import { signIn, useSession } from "next-auth/react";
+import {useSession } from "next-auth/react";
 import Link from "next/link";
 import {providerIcons} from "../shared/data"
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/SignIn.module.css";
 import {ProviderProp} from "../shared/types"
 import ErrorComponent from "./Error";
 import { useRouter } from "next/router";
+import { credSignin, btnLoadingAnimation } from "src/shared/utils/utils";
 
 const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElement => {
     const {data:session} = useSession()
@@ -22,28 +23,20 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
         setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
     }
 
-    const btnLoadingAnimation = (text: string, disabled: boolean): void => {
-        let buttonEl = (button.current as unknown as HTMLButtonElement);
-        buttonEl.innerText = text;
-        buttonEl.disabled = disabled;
-    }
-
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
-        btnLoadingAnimation("loading", true)
+        btnLoadingAnimation(button, "Loading...", true)
         try {
-            const buttonTarget = button.current as unknown as HTMLButtonElement
-            let res = await signIn(buttonTarget.id, { ...authCredits,redirect: false})
-            console.log(res)
-            if (res?.ok === false) {
-                throw(res)
-            }
-            router.push("/edit")
-        } catch (error: any) {
-            console.error("testing")
-            setErrorText(error.error);
+            let signInRes = await credSignin(button, authCredits)
+            console.log(signInRes)
+            setErrorText("")
+            router.push(signInRes?.url as string)
+        }
+        catch(e: any) {
+            console.log(e)
+            setErrorText(e.error)
         } finally {
-            btnLoadingAnimation("Sign in", false)
+            btnLoadingAnimation(button, "Sign in", false)
         }
     }
     
@@ -86,5 +79,3 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
 }
 
 export default SignInComponent;
-
-//ss

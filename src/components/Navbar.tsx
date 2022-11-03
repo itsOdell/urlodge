@@ -40,7 +40,6 @@ const NavbarComponent: React.FC = (): React.ReactElement => {
                 <Link href={linkUrl} passHref={true}>
                     <a>
                         {session?.user?.image ? userImage : defaultImage}
-                        {/* <img src={(session?.user?.image as string)} alt="" /> */}
                     </a>
                 </Link>
                 </div>
