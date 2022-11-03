@@ -25,7 +25,7 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
             let signUpRes = await credSignup(authCredits)
             console.log(signUpRes)
             setErrorText("")
-            router.push(signUpRes.url)
+            router.push("/signin")
         } catch (e: any) {
             console.log(e)
             setErrorText(e.error)
@@ -53,7 +53,7 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
                         </div>
                         <div className={styles.signup_input_container}>
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your email" onChange={handleChange} required={true}/>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" onChange={handleChange} required={true}/>
                         </div>
                      </div>
                      <div className={styles.signup_buttons_container}>

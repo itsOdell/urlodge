@@ -30,7 +30,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
             let signInRes = await credSignin(button, authCredits)
             console.log(signInRes)
             setErrorText("")
-            router.push(signInRes?.url as string)
+            router.push("/edit")
         }
         catch(e: any) {
             console.log(e)
@@ -55,7 +55,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
                         </div>
                         <div className={styles.signin_input_container}>
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your email" onChange={handleChange} required={true}/>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" onChange={handleChange} required={true}/>
                         </div>
                      </div>
                      <div className={styles.signin_buttons_container}>

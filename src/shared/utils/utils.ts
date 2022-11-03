@@ -13,7 +13,6 @@ export const credSignin = async (button: any, authCredits: {email: string, passw
 export const credSignup = async (authCredits: {email: string, password: string}) => {
     const res = JSON.parse((await axios.post("/api/signup", authCredits)).data)
     if (res?.ok === false) {
-        console.log("wooooo")
         throw(res)
     }
     return res
