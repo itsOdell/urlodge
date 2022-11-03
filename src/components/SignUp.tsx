@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "../styles/SignUp.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -11,15 +11,15 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
     console.log(session)
     const router = useRouter();
     const button = useRef(null)
-    let [errorText, setErrorText] = useState<string>("")
-    let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({
-        linkTag: "",
-        email: "",
-        password: "",
-    })
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
+        let [errorText, setErrorText] = useState<string>("")
+        let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({
+            linkTag: "",
+            email: "",
+            password: "",
+        })
+        
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+            setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
     }
 
     const btnLoadingAnimation = (text: string, disabled: boolean): void => {
@@ -27,7 +27,7 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
         buttonEl.innerText = text;
         buttonEl.disabled = disabled;
     }
-
+    
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         btnLoadingAnimation("loading", true)

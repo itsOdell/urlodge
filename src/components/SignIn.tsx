@@ -1,7 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import {providerIcons} from "../shared/data"
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "../styles/SignIn.module.css";
 import {ProviderProp} from "../shared/types"
 import ErrorComponent from "./Error";
@@ -9,9 +9,9 @@ import { useRouter } from "next/router";
 
 const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElement => {
     const {data:session} = useSession()
-    console.log(session)
-    const button = useRef(null)
     const router = useRouter();
+    const button = useRef(null)
+    console.log(session)
     let [errorText, setErrorText] = useState<string>("");
     let [authCredits, setAuthCredits] = useState<{email: string, password: string}>({
         email: "",
