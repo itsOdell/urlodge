@@ -9,7 +9,7 @@ import ReviewsComponent from '../components/Reviews'
 import PlansComponent from '../components/Plans'
 import FooterComponent from '../components/Footer'
 
-const Home: NextPage = () => {
+const Home: NextPage = (): React.ReactElement=> {
   const width = useWidth();
   const onMobile: boolean = width > 1000 ? false : true;
   

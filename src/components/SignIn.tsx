@@ -11,8 +11,7 @@ import { credSignin, btnLoadingAnimation } from "src/shared/utils/utils";
 const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElement => {
     const {data:session, status} = useSession()
     const router = useRouter();
-    const button = useRef(null)
-    console.log(session)
+    const button = useRef<HTMLButtonElement>(null)
     let [errorText, setErrorText] = useState<string>("");
     let [authCredits, setAuthCredits] = useState<{email: string, password: string}>({
         email: "",
@@ -25,9 +24,10 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
 
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
-        btnLoadingAnimation(button, "Loading...", true)
+        let buttonCurrent = button.current as HTMLButtonElement
+        btnLoadingAnimation(buttonCurrent, "Loading...", true)
         try {
-            let signInRes = await credSignin(button, authCredits)
+            let signInRes = await credSignin(buttonCurrent, authCredits)
             console.log(signInRes)
             setErrorText("")
             router.push("/edit")
@@ -36,7 +36,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
             console.log(e)
             setErrorText(e.error)
         } finally {
-            btnLoadingAnimation(button, "Sign in", false)
+            btnLoadingAnimation(buttonCurrent, "Sign in", false)
         }
     }
     

@@ -10,7 +10,7 @@ const Edit: NextPage = () => {
   return (
     <main>
       <Head>
-        <title>URLodge | All in one links!</title>
+        <title>URLodge | Editing Profile</title>
       </Head>
       <EditComponent />
     </main>
@@ -18,6 +18,3 @@ const Edit: NextPage = () => {
 }
 
 export default Edit
-
-
-//use csr

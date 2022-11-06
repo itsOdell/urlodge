@@ -3,7 +3,7 @@ import { getProviders } from "next-auth/react"
 import SignInComponent from "../components/SignIn"
 import type {ProviderProp} from "../shared/types"
 
-const SignIn: NextPage<ProviderProp> = ({ providers }) => {
+const SignIn: NextPage<ProviderProp> = ({ providers }): React.ReactElement => {
   return (
     <SignInComponent providers={providers} />
   )
@@ -12,9 +12,11 @@ const SignIn: NextPage<ProviderProp> = ({ providers }) => {
 export default SignIn;
 
 export async function getServerSideProps() {
+  const providers = await getProviders()
+
   return {
     props: {
-      providers: await getProviders()
-    },
+      providers
+    }
   }
 }

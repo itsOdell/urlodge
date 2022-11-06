@@ -1,9 +1,6 @@
 import styles from "../styles/Home.module.css";
-import Img from "next/image";
-import {useSession} from "next-auth/react";
 
 const HomeComponent: React.FC = (): React.ReactElement => {
-    const {data: session} = useSession();
     return (
         <main id={"Home"} className={`${styles.home}`}>
             <div className={`container ${styles.home_container}`}>

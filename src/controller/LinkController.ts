@@ -12,12 +12,11 @@ export async function createLink(link: string, title: string, userId: string): P
     return linkres
 }
 
-// export async function findFirst(type: string, target: string, include?: {[x: string]: boolean}): Promise<User | null> {
-//     let user: User | null = await prisma.user.findFirst({ 
-//         where: {
-//           [type]: target
-//         },
-//         include: include
-//       })
-//     return user
-// }
+export async function deleteLink(id: string): Promise<Link | null> {
+    let linkres: Link | null = await prisma.link.delete({
+        where: {
+            id: id
+        }
+    })
+    return linkres
+}

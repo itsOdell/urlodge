@@ -1,27 +1,22 @@
 import { signIn, SignInResponse } from "next-auth/react"
 import axios from "axios";
+import type { SignUpRes } from "../types";
 
-export const credSignin = async (button: any, authCredits: {email: string, password: string}): Promise<SignInResponse | undefined> => {
-    const buttonTarget = button.current as unknown as HTMLButtonElement
-    let res = await signIn(buttonTarget.id, { ...authCredits, redirect: false})
-    if (res?.ok === false) {
-        throw(res)
-    }
-    return res
+export const credSignin = async (button: HTMLButtonElement, authCredits: {email: string, password: string}): Promise<SignInResponse | undefined> => {
+    let userInfo: SignInResponse | undefined = await signIn(button.id, { ...authCredits, redirect: false})
+    if (userInfo?.ok === false) throw(userInfo)
+    return userInfo
 }
 
-export const credSignup = async (authCredits: {email: string, password: string}) => {
-    const res = JSON.parse((await axios.post("/api/signup", authCredits)).data)
-    if (res?.ok === false) {
-        throw(res)
-    }
-    return res
+export const credSignup = async (authCredits: {email: string, password: string}): Promise<SignUpRes | undefined> => {
+    const userInfo: SignUpRes = JSON.parse((await axios.post("/api/signup", authCredits)).data);
+    if (userInfo.ok === false) throw(userInfo)
+    return userInfo
 }
 
-export const btnLoadingAnimation = (button: any, text: string, disabled: boolean): void => {
-    let buttonEl = (button.current as unknown as HTMLButtonElement);
-    buttonEl.innerText = text;
-    buttonEl.disabled = disabled;
+export const btnLoadingAnimation = (button: HTMLButtonElement, text: string, disabled: boolean): void => {
+    button.innerText = text;
+    button.disabled = disabled;
 }
 
 export function exclude(model: any, ...keys: string[]) {
@@ -29,5 +24,5 @@ export function exclude(model: any, ...keys: string[]) {
       delete model[key]
     }
     return model
-  }
+}
   

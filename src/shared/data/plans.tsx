@@ -1,4 +1,5 @@
 import {PlanProp} from "../types"
+
 export const plans: PlanProp[] = [
     {
         title: "free forever",

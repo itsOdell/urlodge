@@ -13,12 +13,12 @@ const EditComponent: React.FC = (): React.ReactElement => {
     if (!session && status == "unauthenticated") {
         router.push("/signin")
     }
-    let url = `/api/user/?type=id&target=${session?.user?.id}`
     let [userData, setUserData] = useState<Omit<User, "password">>()
     useEffect(() => {
+        let url = `/api/user/?type=id&target=${session?.user?.id}`
         async function getData() {
             try {
-                const res = JSON.parse(await (await axios.get(url)).data)
+                const res: User = (await axios.get(url)).data
                 setUserData(res)   
             } catch (error) {
                 console.error(error)    

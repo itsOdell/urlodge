@@ -3,7 +3,6 @@ import { Quote } from "./icons";
 import { ReviewProp } from "../shared/types";
 
 const ReviewComponent: React.FC<ReviewProp> = ({image, name, comment}): React.ReactElement => {
-    // fix sttrucure
     return (
         <div className={styles.review}>
             <div className={styles.review_container}>

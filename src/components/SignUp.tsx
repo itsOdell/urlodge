@@ -9,7 +9,7 @@ import { credSignup, btnLoadingAnimation } from "src/shared/utils/utils";
 const SignUpComponent: React.FC = (): React.ReactElement => {
     const {data:session, status} = useSession()
     const router = useRouter();
-    const button = useRef(null)
+    const button = useRef<HTMLButtonElement>(null)
     let [errorText, setErrorText] = useState<string>("")
     let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({ linkTag: "", email: "", password: ""})
         
@@ -19,7 +19,8 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
     
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
-        btnLoadingAnimation(button, "loading", true)
+        let buttonCurrent = button.current as HTMLButtonElement
+        btnLoadingAnimation(buttonCurrent, "loading", true)
         try {
             let signUpRes = await credSignup(authCredits)
             console.log(signUpRes)
@@ -29,7 +30,7 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
             console.log(e)
             setErrorText(e.error)
         } finally {
-            btnLoadingAnimation(button, "Sign up", false)
+            btnLoadingAnimation(buttonCurrent, "Sign up", false)
         }
     }
     
