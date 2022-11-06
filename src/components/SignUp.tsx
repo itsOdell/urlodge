@@ -7,8 +7,7 @@ import ErrorComponent from "./Error";
 import { credSignup, btnLoadingAnimation } from "src/shared/utils/utils";
 
 const SignUpComponent: React.FC = (): React.ReactElement => {
-    const {data:session} = useSession()
-    console.log(session)
+    const {data:session, status} = useSession()
     const router = useRouter();
     const button = useRef(null)
     let [errorText, setErrorText] = useState<string>("")

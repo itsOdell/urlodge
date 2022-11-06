@@ -1,0 +1,7 @@
+.link_button {
+  font-size: 30px;
+  width: 250px;
+  padding: 10px 0;
+  background-color: black;
+  color: var(--light-green);
+}

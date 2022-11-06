@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { credSignin, btnLoadingAnimation } from "src/shared/utils/utils";
 
 const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElement => {
-    const {data:session} = useSession()
+    const {data:session, status} = useSession()
     const router = useRouter();
     const button = useRef(null)
     console.log(session)

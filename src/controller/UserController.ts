@@ -12,11 +12,12 @@ export async function createUser(linkTag: string, email: string, hashedPass: str
     return user
 }
 
-export async function findFirst(type: string, target: string): Promise<User | null> {
+export async function findFirst(type: string, target: string, include?: {[x: string]: boolean}): Promise<User | null> {
     let user: User | null = await prisma.user.findFirst({ 
         where: {
           [type]: target
-        }
+        },
+        include: include
       })
     return user
 }

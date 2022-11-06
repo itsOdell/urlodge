@@ -23,3 +23,11 @@ export const btnLoadingAnimation = (button: any, text: string, disabled: boolean
     buttonEl.innerText = text;
     buttonEl.disabled = disabled;
 }
+
+export function exclude(model: any, ...keys: string[]) {
+    for (let key of keys) {
+      delete model[key]
+    }
+    return model
+  }
+  
