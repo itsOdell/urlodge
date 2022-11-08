@@ -17,7 +17,7 @@ export async function findFirst(type: string, target: string, include?: {[x: str
         where: {
           [type]: target
         },
-        include: include
+        include: include,
       })
     return user
 }

@@ -12,8 +12,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const {query: {type, target}} = req
-    let user = await findFirst(String(type), String(target), {links: true})
-    // let user = exclude(data, 'password', "emailVerified")
-    res.json(user)
+    let userData = await findFirst(String(type), String(target), {links: true})
+    exclude(userData || {}, "password", "emailVerified")
+    res.json(userData)
   }
 }

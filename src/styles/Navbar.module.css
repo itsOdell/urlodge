@@ -33,7 +33,11 @@
   margin: 0 0 0 20px;
   cursor: pointer;
 }
-
+.userImage {
+  width: 44px;
+  height: 44px;
+  border-radius: 100px;
+}
 @media (max-width: 500px) {
   .nav_left a:not(:first-child) {
     display: none;

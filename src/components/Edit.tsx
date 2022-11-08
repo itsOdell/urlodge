@@ -20,13 +20,15 @@ const EditComponent: React.FC = (): React.ReactElement => {
             try {
                 const res: User = (await axios.get(url)).data
                 setUserData(res)   
-            } catch (error) {
+            } catch (error: any) {
                 console.error(error)    
             }
         }
         getData()
     }, [session])
-    
+
+    console.log(userData)
+
     async function addLink() {
         let link = prompt("The URL for the new link");
         let title = prompt("The title for the new link");
@@ -43,10 +45,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
             setUserData((prev: any) => ({...prev, links: [...prev.links, linkres]}));
         }
         else console.log("enter all credentials")
-    }
-
-    if (!userData) {
-        return <p style={{color: "black"}}>loading</p>
     }
 
     return (
