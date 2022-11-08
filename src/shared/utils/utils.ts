@@ -9,7 +9,7 @@ export const credSignin = async (button: HTMLButtonElement, authCredits: {email:
 }
 
 export const credSignup = async (authCredits: {email: string, password: string}): Promise<SignUpRes | undefined> => {
-    const userInfo: SignUpRes = JSON.parse((await axios.post("/api/signup", authCredits)).data);
+    const userInfo: SignUpRes = (await axios.post("/api/signup", authCredits)).data;
     if (userInfo.ok === false) throw(userInfo)
     return userInfo
 }

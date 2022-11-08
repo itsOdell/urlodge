@@ -13,7 +13,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     if (!session && status == "unauthenticated") {
         router.push("/signin")
     }
-    let [userData, setUserData] = useState<Omit<User, "password">>()
+    let [userData, setUserData] = useState<User>()
     useEffect(() => {
         let url = `/api/user/?type=id&target=${session?.user?.id}`
         async function getData() {
@@ -26,9 +26,23 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
         getData()
     }, [session])
-
-    function addLink() {
-
+    
+    async function addLink() {
+        let link = prompt("The URL for the new link");
+        let title = prompt("The title for the new link");
+        if (link && title) {
+            let linkres = (await axios.request({
+                method: 'POST',
+                url: 'http://localhost:3000/api/link/',
+                params: {
+                  link,
+                  title,
+                  userId: 'cl9qozkgl0000wnrjv0kha7sd'
+                }
+              })).data
+            setUserData((prev: any) => ({...prev, links: [...prev.links, linkres]}));
+        }
+        else console.log("enter all credentials")
     }
 
     if (!userData) {
@@ -58,10 +72,9 @@ const EditComponent: React.FC = (): React.ReactElement => {
                 </div>
                 <div className={styles.edit_links}>
                     {/* @ts-ignore */}
-                    {userData?.links?.map((link: Link) => {
-                        console.log(link)
+                    {userData?.links?.map((link: Link, i) => {
                         return (
-                        <LinkComponent {...link} />
+                            <LinkComponent {...link} key={link.id || i}/>
                         )
                     })}
                     <button className={styles.edit_add_button} onClick={addLink}>+</button>

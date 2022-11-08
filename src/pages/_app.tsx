@@ -10,9 +10,9 @@ import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps<{session: Session}>) {
   return (
-	<SessionProvider session={session}>
-		<Component {...pageProps} />
-  	</SessionProvider>
+		<SessionProvider session={session}>
+			<Component {...pageProps} />
+  		</SessionProvider>
 	)
 }
 

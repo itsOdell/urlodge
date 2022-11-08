@@ -2,6 +2,9 @@ import { Link } from "@prisma/client";
 import prisma from "../prisma/prisma";
 
 export async function createLink(link: string, title: string, userId: string): Promise<Link> {
+    if (!link.includes("http://")) {
+        link = `http://${link}`
+    }
     let linkres: Link = await prisma.link.create({
         data: {
             link: link,
