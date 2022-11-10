@@ -25,4 +25,13 @@ export function exclude(model: any, ...keys: string[]) {
     }
     return model
 }
+
+export async function requester(method: "GET" | "POST" | "DELETE" | "PUT", url: string, params?: {[x: string]: any}) {
+    let res = (await axios.request({
+        method: method,
+        url: `http://localhost:3000/api/${url}`,
+        params: params
+      })).data;
+      return res;
+}
   
