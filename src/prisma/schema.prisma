@@ -39,7 +39,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @unique @default(cuid())
   name          String?   @default("") //their real name
   email         String    @unique
   emailVerified DateTime?

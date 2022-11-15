@@ -2,29 +2,31 @@ import styles from "../styles/Edit.module.css";
 import axios from "axios";
 import {useSession} from "next-auth/react"
 import { useEffect, useRef, useState } from "react";
-import {useRouter} from "next/router"
 import { User } from "@prisma/client";
 import LinkComponent from "./Link"
 import type {Link} from "@prisma/client"
-import { requester } from "src/shared/utils/utils";
 
 const EditComponent: React.FC = (): React.ReactElement => {
-    const {data: session, status}: any = useSession()
-    let router = useRouter()
-    const userTag = useRef(null);
-    const userBiography = useRef(null);
-    if (!session && status == "unauthenticated") {
-        router.push("/signin")
-    }
+    const {data: session}: any = useSession()
+    const userTag = useRef<HTMLInputElement>(null);
+    const userBiography = useRef<HTMLInputElement>(null);
     let [userData, setUserData] = useState<User>()
+
     useEffect(() => {
-        let url = `/api/user/?type=id&target=${session?.user?.id}`
+        let url = `http://localhost:3000/api/user/`
         async function getData() {
             try {
-                const res: User = (await axios.get(url)).data
+                const res: any = (await axios.request({
+                    method: 'GET',
+                    url,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    params: {
+                        type: 'id'
+                    }
+                })).data
                 setUserData(res)   
             } catch (error: any) {
-                console.error(error)    
+                console.error(error)
             }
         }
         getData()
@@ -33,41 +35,35 @@ const EditComponent: React.FC = (): React.ReactElement => {
     console.log(userData)
 
     async function updateUser() {
-        console.log("ran")
+        let url = "http://localhost:3000/api/user"
         try {
-            let updateRes = (await axios.request({
+            let updateRes: User = (await axios.request({
                 method: 'PUT',
-                url: 'http://localhost:3000/api/user',
-                params: {userId: 'cl9qozkgl0000wnrjv0kha7sd'},
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                url: url,
                 data: {
-                    // @ts-ignore
-                    "tag": userTag?.current?.value, 
-                    // @ts-ignore
-                    "biography": userBiography?.current.value}
+                    tag: userTag?.current?.value, 
+                    biography: userBiography?.current?.value}
             })).data
-            console.log(updateRes)
+            setUserData((prev: any) => ({...prev, tag: updateRes.tag, biography: updateRes.biography}))
         } catch (error) {
             console.error(error)
         }
     }
 
     async function addLink() {
-        let link = prompt("The URL for the new link");
-        let title = prompt("The title for the new link");
-        if (link && title) {
+        let url = "http://localhost:3000/api/link"
+        try {
+            let link = prompt("The URL for the new link");
+            let title = prompt("The title for the new link");
             let linkres = (await axios.request({
                 method: 'POST',
-                url: 'http://localhost:3000/api/link/',
-                params: {
-                  link,
-                  title,
-                  userId: 'cl9qozkgl0000wnrjv0kha7sd'
-                }
-              })).data
-            setUserData((prev: any) => ({...prev, links: [...prev.links, linkres]}));
+                url,
+                data: {link, title}
+            })).data
+                setUserData((prev: any) => ({...prev, links: [...prev.links, linkres]}));
+        } catch (error: any) {
+            alert(error.response.data.error)
         }
-        else console.log("enter all credentials")
     }
 
     return (
@@ -95,9 +91,9 @@ const EditComponent: React.FC = (): React.ReactElement => {
                 <div className={styles.edit_links}>
                     <div className={styles.edit_links_container}>
                     {/* @ts-ignore */}
-                    {userData?.links?.map((link: Link, i) => {
+                    {userData?.links?.map((link: Link) => {
                         return (
-                            <LinkComponent {...link} key={link.id || i}/>
+                            <LinkComponent {...link} key={link.id}/>
                         )
                     })}
                     <a>

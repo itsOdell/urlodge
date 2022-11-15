@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import {PrismaAdapter} from "@next-auth/prisma-adapter";
 import prisma from "../../../prisma/prisma"
 import { JWT } from "next-auth/jwt";
-import {findFirst} from "src/controller/UserController";
+import {findUser} from "src/controller/UserController";
 
 
 export const authOptions: NextAuthOptions = {
@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       authorize: async function (credentials: Record<string, string> | undefined, req: Pick<RequestInternal, "headers" | "body" | "query" | "method">) {
         const {email, password} = credentials as {email: string, password: string};
-        let user = await findFirst("email", email)
+        let user = await findUser("email", email)
         
         if (user) {
           let passwordCompares: boolean = await bcrypt.compare(password, String(user.password));
@@ -39,7 +39,6 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: '/signin',
-    // signOut: '/signout',
   },
   callbacks: {
     session: async ({ session, token }: {session: any, token: JWT}) => {

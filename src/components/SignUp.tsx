@@ -1,14 +1,11 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/SignUp.module.css";
-import { useRouter } from "next/router";
 import ErrorComponent from "./Error";
-import { credSignup, btnLoadingAnimation } from "src/shared/utils/utils";
+import { btnLoadingAnimation } from "src/shared/utils/utils";
+import request from "axios"
 
 const SignUpComponent: React.FC = (): React.ReactElement => {
-    const {data:session, status} = useSession()
-    const router = useRouter();
     const button = useRef<HTMLButtonElement>(null)
     let [errorText, setErrorText] = useState<string>("")
     let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({ linkTag: "", email: "", password: ""})
@@ -16,22 +13,19 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
     }
-    
+
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "loading", true)
         try {
-            let signUpRes = await credSignup(authCredits)
-            console.log(signUpRes)
+            await request({method: "POST", url: "http://localhost:3000/api/user", data: authCredits})
             setErrorText("")
-            router.push("/signin")
         } catch (e: any) {
             console.log(e)
-            setErrorText(e.error)
-        } finally {
-            btnLoadingAnimation(buttonCurrent, "Sign up", false)
-        }
+            setErrorText(e.response.data)
+        } 
+         btnLoadingAnimation(buttonCurrent, "Sign up", false)
     }
     
     return (
