@@ -1,5 +1,5 @@
 import styles from "../styles/Edit.module.css";
-import axios from "axios";
+import request from "axios";
 import {useSession} from "next-auth/react"
 import { useEffect, useRef, useState } from "react";
 import { User } from "@prisma/client";
@@ -16,13 +16,11 @@ const EditComponent: React.FC = (): React.ReactElement => {
         let url = `http://localhost:3000/api/user/`
         async function getData() {
             try {
-                const res: any = (await axios.request({
+                const res: any = (await request({
                     method: 'GET',
                     url,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    params: {
-                        type: 'id'
-                    }
+                    params: {type: 'id'}
                 })).data
                 setUserData(res)   
             } catch (error: any) {
@@ -37,7 +35,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     async function updateUser() {
         let url = "http://localhost:3000/api/user"
         try {
-            let updateRes: User = (await axios.request({
+            let updateRes: User = (await request({
                 method: 'PUT',
                 url: url,
                 data: {
@@ -47,6 +45,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
             setUserData((prev: any) => ({...prev, tag: updateRes.tag, biography: updateRes.biography}))
         } catch (error) {
             console.error(error)
+            //show error message
         }
     }
 
@@ -55,7 +54,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
         try {
             let link = prompt("The URL for the new link");
             let title = prompt("The title for the new link");
-            let linkres = (await axios.request({
+            let linkres = (await request({
                 method: 'POST',
                 url,
                 data: {link, title}

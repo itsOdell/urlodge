@@ -18,15 +18,17 @@ export default async function handler(
     if (req.method === "GET") {
       try {
         const {type} = req.query;
-        let userData = exclude(await findUser(String(type), userId, {links: true}) || {}, "password", "emailVerified")
+        let userData = exclude(await findUser(String(type), userId, {links: true}), "password", "emailVerified")
         res.status(200).json(userData)
       } catch (error: any) {
+        console.error(error)
         res.status(500).send({error: errorCodes[error.code] || error.message})
       }
     }
     if (req.method === "PUT") {
       try {
-        let userData = exclude(await updateUser(userId, {...req.body}) || {}, "password", "emailVerified");
+        let toUpdate = {...req.body}
+        let userData = exclude(await updateUser(userId, toUpdate), "password", "emailVerified");
         res.status(200).json(userData);
       } catch (error: any) {
         console.error(error.message);

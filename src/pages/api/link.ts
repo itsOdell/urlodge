@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const token: any = await getSession({req})
-  const userId = token?.user.id 
+  const userId = token?.user.id;
   if (req.method === 'POST') {
     try {
       const {link, title} = req.body;

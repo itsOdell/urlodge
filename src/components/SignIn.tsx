@@ -1,4 +1,3 @@
-import {useSession } from "next-auth/react";
 import Link from "next/link";
 import {providerIcons} from "../shared/data"
 import { ChangeEvent, useRef, useState } from "react";
@@ -9,14 +8,10 @@ import { useRouter } from "next/router";
 import { credSignin, btnLoadingAnimation } from "src/shared/utils/utils";
 
 const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElement => {
-    const {data:session, status} = useSession()
     const router = useRouter();
     const button = useRef<HTMLButtonElement>(null)
     let [errorText, setErrorText] = useState<string>("");
-    let [authCredits, setAuthCredits] = useState<{email: string, password: string}>({
-        email: "",
-        password: "",
-    })
+    let [authCredits, setAuthCredits] = useState<{email: string, password: string}>({email: "",password: ""})
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
@@ -27,17 +22,15 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "Loading...", true)
         try {
-            let signInRes = await credSignin(buttonCurrent, authCredits)
-            console.log(signInRes)
+            console.log(await credSignin(buttonCurrent, authCredits))
             setErrorText("")
             router.push("/edit")
         }
         catch(e: any) {
             console.log(e)
             setErrorText(e.error)
-        } finally {
-            btnLoadingAnimation(buttonCurrent, "Sign in", false)
         }
+        btnLoadingAnimation(buttonCurrent, "Sign in", false)
     }
     
     return (
