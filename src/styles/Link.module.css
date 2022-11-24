@@ -1,7 +1,27 @@
+.link {
+  position: relative;
+}
 .link_button {
   font-size: 30px;
   width: 250px;
   padding: 10px 0;
   background-color: black;
   color: var(--light-green);
+}
+.x {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  background-color: var(--light-green);
+  width: 23px;
+  height: 23px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 50px;
+  cursor: pointer;
+}
+.x span {
+  margin-top: -3px;
 }

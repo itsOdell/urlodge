@@ -2,13 +2,19 @@ import styles from "src/styles/Link.module.css"
 interface LinkProp {
     link: string;
     title: string;
+    deleteHandler: any
 }
 
-const LinkComponent: React.FC<LinkProp> = ({link, title}): React.ReactElement => {
+const LinkComponent: React.FC<LinkProp> = ({link, title, deleteHandler}): React.ReactElement => {
     return (
-        <a href={link} target="_blank">
+        <div className={styles.link}>
+            <div onClick={deleteHandler} className={styles.x}>
+                <span>x</span>
+            </div>
+        <a href={link} target="_blank" >
             <button className={styles.link_button}>{title}</button>
         </a>
+        </div>
     )
 }
 

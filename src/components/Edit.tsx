@@ -10,8 +10,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     const {data: session}: any = useSession()
     const userTag = useRef<HTMLInputElement>(null);
     const userBiography = useRef<HTMLInputElement>(null);
-    let [userData, setUserData] = useState<User>()
-
+    let [userData, setUserData] = useState<any>()
     useEffect(() => {
         let url = `http://localhost:3000/api/user/`
         async function getData() {
@@ -30,7 +29,25 @@ const EditComponent: React.FC = (): React.ReactElement => {
         getData()
     }, [session])
 
-    console.log(userData)
+
+    async function deleteHandler(linkId: string) {
+        let url = "http://localhost:3000/api/link"
+        try {
+            let deleteRes = (await request({
+                method: "DELETE",
+                url,
+                data: {
+                    linkId
+                }
+            })).data;
+            setUserData((prev: any) => ({...prev, links:  prev.links.filter((link: Link) => link.id != linkId)}))
+        } catch (error) {
+            console.error(error)
+            alert(error)
+        }
+    }
+
+    console.log("test",userData)
 
     async function updateUser() {
         let url = "http://localhost:3000/api/user"
@@ -45,7 +62,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
             setUserData((prev: any) => ({...prev, tag: updateRes.tag, biography: updateRes.biography}))
         } catch (error) {
             console.error(error)
-            //show error message
+            alert(alert)
         }
     }
 
@@ -67,39 +84,35 @@ const EditComponent: React.FC = (): React.ReactElement => {
 
     return (
         <section className={styles.edit}>
-            <div className={styles.edit_container}>
-                <div className={styles.edit_content}>
-                    <div className={styles.edit_profile}>
-                        <div className={styles.profile_img_container}>
-                            {
-                            userData?.image ?
-                            <img src={userData.image} alt="user image" referrerPolicy="no-referrer"/> : 
-                            <div>+</div>
-                            }
-                        </div>
-                        <div className={styles.input_container}>
-                            <label htmlFor="profile_name_input">Your Name</label>
-                            <input type="text" className={styles.profile_name_input} name="profile_name_input" id="profile_name_input" placeholder="Your name" defaultValue={String(userData?.tag) || ""} ref={userTag}/>
-                        </div>
-                        <div className={styles.input_container}>
-                            <label htmlFor="profile_biograhpy_input">Biograhpy</label>
-                            <input type="text" className={styles.profile_biograhpy_input} name="profile_biograhpy_input" id="profile_biograhpy_input" placeholder="Your bio" defaultValue={String(userData?.biography) || ""} ref={userBiography}/>
-                        </div>
-                        <button className={styles.profile_save} onClick={updateUser}>Save</button>
+                <div className={styles.input_file_container}>
+                    <input type="file" name="banner" id="file" className={styles.input_file}/>
+                    <label htmlFor="file">+</label>
                 </div>
-                <div className={styles.edit_links}>
-                    <div className={styles.edit_links_container}>
-                    {/* @ts-ignore */}
-                    {userData?.links?.map((link: Link) => {
-                        return (
-                            <LinkComponent {...link} key={link.id}/>
-                        )
-                    })}
-                    <a>
-                        <button className={styles.edit_add_button} onClick={addLink}>+</button>
-                    </a>
+                <img src={String(userData?.banner)} alt="your banner" className={styles.userBanner} referrerPolicy="no-referrer" />
+            <div className={styles.container}>
+                <div className={styles.userContainer}>
+                    <div className={styles.userImage}>
+                    <img src={String(userData?.image)} alt="your image" className={styles.userImage} />
+                        <div className={styles.input_file_user}>
+                            <input type="file" name="banner" id="file"/>
+                            <label htmlFor="file">+</label>
+                        </div>
                     </div>
+                    <div className={styles.userInputContainer}>
+                        <label htmlFor="tag">Name</label>
+                        <input type="text" name="tag" id="tag" className={styles.input}/>
+                    </div>
+                    <div className={styles.userInputContainer}>
+                        <label htmlFor="bio">Bio</label>
+                        <input type="text" name="bio" id="bio" className={styles.input}/>
+                    </div>
+                    <button onClick={updateUser} className={styles.add_link}>Save</button>
                 </div>
+                <div className={styles.linksContainer}>
+                {userData?.links?.map((link: Link) => <LinkComponent {...link} key={link.id} deleteHandler={() => deleteHandler(link.id)}/>)}
+                <a>
+                     <button onClick={addLink}>+</button>
+                </a>
                 </div>
             </div>
         </section>
@@ -107,3 +120,38 @@ const EditComponent: React.FC = (): React.ReactElement => {
 }
 
 export default EditComponent
+{/* <div className={styles.edit_container}>
+    <div className={styles.edit_content}>
+        <div className={styles.edit_profile}>
+            <div className={styles.profile_img_container}>
+                {
+                userData?.image ?
+                <img src={userData.image} alt="user image" referrerPolicy="no-referrer"/> : 
+                <div>+</div>
+                }
+            </div>
+            <div className={styles.input_container}>
+                <label htmlFor="profile_name_input">Your Name</label>
+                <input type="text" className={styles.profile_name_input} name="profile_name_input" id="profile_name_input" placeholder="Your name" defaultValue={String(userData?.tag) || ""} ref={userTag}/>
+            </div>
+            <div className={styles.input_container}>
+                <label htmlFor="profile_biograhpy_input">Biograhpy</label>
+                <input type="text" className={styles.profile_biograhpy_input} name="profile_biograhpy_input" id="profile_biograhpy_input" placeholder="Your bio" defaultValue={String(userData?.biography) || ""} ref={userBiography}/>
+            </div>
+            <button className={styles.profile_save} onClick={updateUser}>Save</button>
+    </div>
+    <div className={styles.edit_links}>
+        <div className={styles.edit_links_container}>
+        {/* @ts-ignore *
+        {userData?.links?.map((link: Link) => {
+            return (
+                <LinkComponent {...link} key={link.id}/>
+            )
+        })}
+        <a>
+            <button className={styles.edit_add_button} onClick={addLink}>+</button>
+        </a>
+        </div>
+    </div>
+    </div>
+</div> */}
