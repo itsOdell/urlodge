@@ -66,6 +66,27 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
     }
 
+    async function addImage(type: "image" | "banner") {
+        let link = prompt("insert image address");
+        let url = "http://localhost:3000/api/user"
+        try {
+            let updateRes: User = (await request({
+                method: "PUT",
+                url,
+                data: {
+                    [type]: link
+                }
+            })).data;
+            console.log(updateRes);
+            setUserData((prev: any) => ({...prev, [type]: link}))
+        } catch (error) {
+         console.error(error)
+         alert(error)   
+        }
+    }
+
+    console.log(userData)
+
     async function addLink() {
         let url = "http://localhost:3000/api/link"
         try {
@@ -84,8 +105,8 @@ const EditComponent: React.FC = (): React.ReactElement => {
 
     return (
         <section className={styles.edit}>
-                <div className={styles.input_file_container}>
-                    <input type="file" name="banner" id="file" className={styles.input_file}/>
+                <div className={styles.input_file_container} onClick={() => addImage("banner")}>
+                    {/* <input type="file" name="banner" id="file" className={styles.input_file}/> */}
                     <label htmlFor="file">+</label>
                 </div>
                 <img src={String(userData?.banner)} alt="your banner" className={styles.userBanner} referrerPolicy="no-referrer" />
@@ -93,8 +114,8 @@ const EditComponent: React.FC = (): React.ReactElement => {
                 <div className={styles.userContainer}>
                     <div className={styles.userImage}>
                     <img src={String(userData?.image)} alt="your image" className={styles.userImage} />
-                        <div className={styles.input_file_user}>
-                            <input type="file" name="banner" id="file"/>
+                        <div className={styles.input_file_user} onClick={() => addImage("image")}>
+                            {/* <input type="file" name="banner" id="file"/> */}
                             <label htmlFor="file">+</label>
                         </div>
                     </div>
@@ -120,38 +141,3 @@ const EditComponent: React.FC = (): React.ReactElement => {
 }
 
 export default EditComponent
-{/* <div className={styles.edit_container}>
-    <div className={styles.edit_content}>
-        <div className={styles.edit_profile}>
-            <div className={styles.profile_img_container}>
-                {
-                userData?.image ?
-                <img src={userData.image} alt="user image" referrerPolicy="no-referrer"/> : 
-                <div>+</div>
-                }
-            </div>
-            <div className={styles.input_container}>
-                <label htmlFor="profile_name_input">Your Name</label>
-                <input type="text" className={styles.profile_name_input} name="profile_name_input" id="profile_name_input" placeholder="Your name" defaultValue={String(userData?.tag) || ""} ref={userTag}/>
-            </div>
-            <div className={styles.input_container}>
-                <label htmlFor="profile_biograhpy_input">Biograhpy</label>
-                <input type="text" className={styles.profile_biograhpy_input} name="profile_biograhpy_input" id="profile_biograhpy_input" placeholder="Your bio" defaultValue={String(userData?.biography) || ""} ref={userBiography}/>
-            </div>
-            <button className={styles.profile_save} onClick={updateUser}>Save</button>
-    </div>
-    <div className={styles.edit_links}>
-        <div className={styles.edit_links_container}>
-        {/* @ts-ignore *
-        {userData?.links?.map((link: Link) => {
-            return (
-                <LinkComponent {...link} key={link.id}/>
-            )
-        })}
-        <a>
-            <button className={styles.edit_add_button} onClick={addLink}>+</button>
-        </a>
-        </div>
-    </div>
-    </div>
-</div> */}
