@@ -12,7 +12,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     const userBiography = useRef<HTMLInputElement>(null);
     let [userData, setUserData] = useState<any>()
     useEffect(() => {
-        let url = `http://localhost:3000/api/user/`
+        let url = `/api/user/`
         async function getData() {
             try {
                 const res: any = (await request({
@@ -31,7 +31,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
 
 
     async function deleteHandler(linkId: string) {
-        let url = "http://localhost:3000/api/link"
+        let url = "/api/link"
         try {
             let deleteRes = (await request({
                 method: "DELETE",
@@ -47,10 +47,9 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
     }
 
-    console.log("test",userData)
 
     async function updateUser() {
-        let url = "http://localhost:3000/api/user"
+        let url = "/api/user"
         try {
             let updateRes: User = (await request({
                 method: 'PUT',
@@ -68,7 +67,8 @@ const EditComponent: React.FC = (): React.ReactElement => {
 
     async function addImage(type: "image" | "banner") {
         let link = prompt("insert image address");
-        let url = "http://localhost:3000/api/user"
+        if (!link) return;
+        let url = "/api/user"
         try {
             let updateRes: User = (await request({
                 method: "PUT",
@@ -77,7 +77,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
                     [type]: link
                 }
             })).data;
-            console.log(updateRes);
             setUserData((prev: any) => ({...prev, [type]: link}))
         } catch (error) {
          console.error(error)
@@ -85,10 +84,9 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
     }
 
-    console.log(userData)
 
     async function addLink() {
-        let url = "http://localhost:3000/api/link"
+        let url = "/api/link"
         try {
             let link = prompt("The URL for the new link");
             let title = prompt("The title for the new link");
@@ -106,7 +104,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
     return (
         <section className={styles.edit}>
                 <div className={styles.input_file_container} onClick={() => addImage("banner")}>
-                    {/* <input type="file" name="banner" id="file" className={styles.input_file}/> */}
                     <label htmlFor="file">+</label>
                 </div>
                 <img src={String(userData?.banner)} alt="your banner" className={styles.userBanner} referrerPolicy="no-referrer" />
@@ -115,19 +112,19 @@ const EditComponent: React.FC = (): React.ReactElement => {
                     <div className={styles.userImage}>
                     <img src={String(userData?.image)} alt="your image" className={styles.userImage} />
                         <div className={styles.input_file_user} onClick={() => addImage("image")}>
-                            {/* <input type="file" name="banner" id="file"/> */}
                             <label htmlFor="file">+</label>
                         </div>
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="tag">Name</label>
-                        <input type="text" name="tag" id="tag" className={styles.input}/>
+                        <input type="text" name="tag" id="tag" className={styles.input} defaultValue={userData?.tag}/>
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="bio">Bio</label>
-                        <input type="text" name="bio" id="bio" className={styles.input}/>
+                        <input type="text" name="bio" id="bio" className={styles.input} defaultValue={userData?.biography}/>
                     </div>
                     <button onClick={updateUser} className={styles.add_link}>Save</button>
+                    <button onClick={async () => {await navigator.clipboard.writeText(`${window.location.origin}/${userData.linkTag}`);alert("copied")}} className={styles.add_link}>Copy Link</button>
                 </div>
                 <div className={styles.linksContainer}>
                 {userData?.links?.map((link: Link) => <LinkComponent {...link} key={link.id} deleteHandler={() => deleteHandler(link.id)}/>)}

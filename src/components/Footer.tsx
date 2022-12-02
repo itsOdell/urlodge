@@ -9,9 +9,6 @@ const FooterComponent: React.FC = (): React.ReactElement => {
                 <h2>@2022 <span>URLodge</span></h2>
              </div>
              <div>
-                {/* <Link href={"#Home"}>
-                    <img src="/assets/logo.png" alt="" />
-                </Link> */}
              </div>
              <div>
                 <a href={"https://github.com"} target="_blank">

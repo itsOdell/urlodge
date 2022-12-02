@@ -19,10 +19,6 @@ const HomeComponent: React.FC = (): React.ReactElement => {
                         <p>Over <span>500</span> things</p>
                     </div>
                 </header>
-
-                {/* <div className={styles.home_image}>
-                    <Img src={"/assets/hero_house.png"} alt={"hero house"} width="630" height="485"/>
-                </div> */}
             </div>
         </main>
     );

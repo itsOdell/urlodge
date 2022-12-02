@@ -22,7 +22,7 @@ const Home: NextPage = (): React.ReactElement=> {
       <HomeComponent />
       <AboutComponent />
       <ReviewsComponent onMobile={onMobile}/>
-      <PlansComponent onMobile={onMobile} />
+      {/* <PlansComponent onMobile={onMobile} /> */}
       <FooterComponent />
     </div>
   )

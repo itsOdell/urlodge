@@ -18,8 +18,9 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
         e.preventDefault();
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "loading", true)
+        let url = process.env.NEXT_PUBLIC_API_URL;
         try {
-            await request({method: "POST", url: "http://localhost:3000/api/user", data: authCredits})
+            await request({method: "POST", url: `${url}/user`, data: authCredits})
             setErrorText("")
         } catch (e: any) {
             console.log(e)

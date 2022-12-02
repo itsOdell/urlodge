@@ -27,7 +27,6 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
             router.push("/edit")
         }
         catch(e: any) {
-            console.log(e)
             setErrorText(e.error)
         }
         btnLoadingAnimation(buttonCurrent, "Sign in", false)
