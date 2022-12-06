@@ -27,6 +27,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
             router.push("/edit")
         }
         catch(e: any) {
+            console.log(e)
             setErrorText(e.error)
         }
         btnLoadingAnimation(buttonCurrent, "Sign in", false)
@@ -61,6 +62,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
                      <div className={styles.signin_signup}>
                     <Link href="/signup">
                         <p>Don't have an account? <span>Sign up for free</span></p>
+                        {/* <Link href={"/api/auth/signout"}><span>Log out here</span></Link> */}
                     </Link>
                      </div>
                      <ErrorComponent text={errorText} />

@@ -16,7 +16,7 @@ export const btnLoadingAnimation = (button: HTMLButtonElement, text: string, dis
 
 export function exclude(model: any, ...keys: string[]) {
     for (let key of keys) {
-      delete model[key]
+            delete model[key]
     }
     return model
 }

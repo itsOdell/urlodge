@@ -18,7 +18,7 @@ export default async function handler(
     if (req.method === "GET") {
       try {
         const {type} = req.query;
-        let userData = exclude(await findUser(String(type), userId, {links: true}), "password", "emailVerified")
+        let userData = exclude(await findUser(String(type), userId, {links: true}), "password")
         res.status(200).json(userData)
       } catch (error: any) {
         console.error(error)
@@ -28,6 +28,7 @@ export default async function handler(
     if (req.method === "PUT") {
       try {
         let toUpdate = {...req.body}
+        console.log(userId, req.body)
         let userData = exclude(await updateUser(userId, toUpdate), "password", "emailVerified");
         res.status(200).json(userData);
       } catch (error: any) {
@@ -42,7 +43,8 @@ export default async function handler(
         let user: User = await createUser(linkTag, email, hashedPass)
         res.status(200).json({id: user.id, image: user.image})
       } catch (error: any) {
-        res.status(400).send({error: errorCodes[error.code] || error.message})   
+        let errorMessage = error.message.includes("Unique") ? "user already exists" : error.message
+        res.status(400).send({error: errorMessage})   
       }
     }   
 }

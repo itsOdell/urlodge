@@ -10,7 +10,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     const {data: session}: any = useSession()
     const userTag = useRef<HTMLInputElement>(null);
     const userBiography = useRef<HTMLInputElement>(null);
-    let [userData, setUserData] = useState<any>()
+    let [userData, setUserData] = useState<Omit<User & {links: Link[]}, "password">>()
     useEffect(() => {
         let url = `/api/user/`
         async function getData() {
@@ -19,7 +19,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
                     method: 'GET',
                     url,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    params: {type: 'id'}
+                    params: {type: 'id'},
                 })).data
                 setUserData(res)   
             } catch (error: any) {
@@ -51,13 +51,16 @@ const EditComponent: React.FC = (): React.ReactElement => {
     async function updateUser() {
         let url = "/api/user"
         try {
+            console.log(userTag.current?.value, userBiography.current?.value)
             let updateRes: User = (await request({
                 method: 'PUT',
                 url: url,
                 data: {
                     tag: userTag?.current?.value, 
-                    biography: userBiography?.current?.value}
-            })).data
+                    biography: userBiography?.current?.value
+                }
+                })).data
+            console.log(updateRes)
             setUserData((prev: any) => ({...prev, tag: updateRes.tag, biography: updateRes.biography}))
         } catch (error) {
             console.error(error)
@@ -117,14 +120,14 @@ const EditComponent: React.FC = (): React.ReactElement => {
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="tag">Name</label>
-                        <input type="text" name="tag" id="tag" className={styles.input} defaultValue={userData?.tag}/>
+                        <input type="text" name="tag" id="tag" className={styles.input} defaultValue={String(userData?.tag)} ref={userTag}/>
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="bio">Bio</label>
-                        <input type="text" name="bio" id="bio" className={styles.input} defaultValue={userData?.biography}/>
+                        <input type="text" name="bio" id="bio" className={styles.input} defaultValue={String(userData?.biography)} ref={userBiography}/>
                     </div>
                     <button onClick={updateUser} className={styles.add_link}>Save</button>
-                    <button onClick={async () => {await navigator.clipboard.writeText(`${window.location.origin}/${userData.linkTag}`);alert("copied")}} className={styles.add_link}>Copy Link</button>
+                    <button onClick={async () => {await navigator.clipboard.writeText(`${window.location.origin}/${String(userData?.linkTag)}`);alert("copied")}} className={styles.add_link}>Copy Link</button>
                 </div>
                 <div className={styles.linksContainer}>
                 {userData?.links?.map((link: Link) => <LinkComponent {...link} key={link.id} deleteHandler={() => deleteHandler(link.id)}/>)}

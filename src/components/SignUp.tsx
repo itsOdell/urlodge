@@ -4,8 +4,10 @@ import styles from "../styles/SignUp.module.css";
 import ErrorComponent from "./Error";
 import { btnLoadingAnimation } from "src/shared/utils/utils";
 import request from "axios"
+import { useRouter } from "next/router";
 
 const SignUpComponent: React.FC = (): React.ReactElement => {
+    let router = useRouter()
     const button = useRef<HTMLButtonElement>(null)
     let [errorText, setErrorText] = useState<string>("")
     let [authCredits, setAuthCredits] = useState<{linkTag: string,email: string, password: string}>({ linkTag: "", email: "", password: ""})
@@ -22,9 +24,10 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
         try {
             await request({method: "POST", url: `${url}/user`, data: authCredits})
             setErrorText("")
+            router.push("/signin")
         } catch (e: any) {
             console.log(e)
-            setErrorText(e.response.data)
+            setErrorText(e.response.data.error)
         } 
          btnLoadingAnimation(buttonCurrent, "Sign up", false)
     }
