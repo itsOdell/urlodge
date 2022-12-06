@@ -27,9 +27,9 @@ const NavbarComponent: React.FC = (): React.ReactElement => {
                     <Link href={"#Reviews"}>
                         <a>Reviews</a>
                     </Link>
-                    {/* <Link href={"#Plans"}>
-                        <a>Plans</a>
-                    </Link> */}
+                    {/* <Link > */}
+                        <a href="/hello">hello</a>
+                    {/* </Link> */}
                 </div>
                 <div className={`${styles.nav_right}`}>
                 <Link href={linkUrl} passHref={true}>
