@@ -3,8 +3,8 @@ import axios from "axios";
 import type { SignUpRes } from "../types";
 import { User } from "@prisma/client";
 
-export const credSignin = async (button: HTMLButtonElement, authCredits: {email: string, password: string}): Promise<SignInResponse | undefined> => {
-    let userInfo: SignInResponse | undefined = await signIn(button.id, { ...authCredits, redirect: false})
+export const credSignin = async (button: HTMLButtonElement, authCredits: {email: string, password: string}, callbackUrl: string): Promise<SignInResponse | undefined> => {
+    let userInfo: SignInResponse | undefined = await signIn(button.id, { ...authCredits, callbackUrl })
     if (userInfo?.ok === false) throw(userInfo)
     return userInfo
 }

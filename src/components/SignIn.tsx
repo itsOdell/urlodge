@@ -17,12 +17,14 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
         setAuthCredits(prev => ({...prev, [e.target.id]: e.target.value}))
     }
 
+
+
     const handleSignIn = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "Loading...", true)
         try {
-            console.log(await credSignin(buttonCurrent, authCredits))
+            console.log(await credSignin(buttonCurrent, authCredits, `${process.env.NEXT_PUBLIC_API_URL}/edit`))
             setErrorText("")
             router.push("/edit")
         }
