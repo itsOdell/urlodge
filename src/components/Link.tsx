@@ -14,7 +14,7 @@ const LinkComponent: React.FC<LinkProp> = ({link, title, deleteHandler}): React.
                 <span>x</span>
             </div> : ""
             }
-        <a href={link} target="_blank" >
+        <a href={link} target="_blank" rel={"noreferrer"}>
             <button className={styles.link_button}>{title}</button>
         </a>
         </div>

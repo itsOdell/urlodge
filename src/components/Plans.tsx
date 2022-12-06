@@ -21,7 +21,7 @@ const PlansComponent: React.FC<PlansComponentProp> = ({onMobile}): React.ReactEl
                         <Swiper centeredSlides={true} pagination={true} >
                             {plans.map((plan: PlanProp) => <SwiperSlide key={plan.key}><PlanComponent {...plan} /></SwiperSlide>)}
                         </Swiper> :
-                        plans.map((plan: PlanProp) => <PlanComponent {...plan}/>)
+                        plans.map((plan: PlanProp) => <PlanComponent {...plan} key={plan.key}/>)
                     }
                 </div>
             </div>

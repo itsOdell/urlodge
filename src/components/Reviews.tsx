@@ -24,7 +24,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProp> = ({onMobile}): React.Rea
                         <Swiper centeredSlides={true} pagination={true} >
                             {reviews.map((review: ReviewProp) => <SwiperSlide key={review.key}><ReviewComponent {...review} /></SwiperSlide>)}
                         </Swiper> :
-                        reviews.map((review: ReviewProp) => <ReviewComponent {...review}/>)
+                        reviews.map((review: ReviewProp) => <ReviewComponent {...review} key={review.key}/>)
                     }
                 </div>
 

@@ -61,7 +61,7 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
                      </div>
                      <div className={styles.signin_signup}>
                     <Link href="/signup">
-                        <p>Don't have an account? <span>Sign up for free</span></p>
+                        <p>Dont have an account? <span>Sign up for free</span></p>
                     </Link>
                         <Link href={"/api/auth/signout"}><span>Log out here</span></Link>
                      </div>

@@ -11,7 +11,7 @@ const FooterComponent: React.FC = (): React.ReactElement => {
              <div>
              </div>
              <div>
-                <a href={"https://github.com"} target="_blank">
+                <a href={"https://github.com"} target="_blank" rel="norefferer">
                     <Github size={"2x"} color={"var(--dark-green)"}/>
                 </a>
             </div>   

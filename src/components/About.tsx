@@ -17,9 +17,9 @@ const AboutComponent: React.FC = (): React.ReactElement => {
                 </header>
 
                 <div className={styles.about_features}>
-                    {features.map((feature: FeatureProps) => {
+                    {features.map((feature: FeatureProps, i: number) => {
                         return (
-                            <FeatureComponent {...feature}/>
+                            <FeatureComponent {...feature} key={i}/>
                         )
                     })}
                 </div>
