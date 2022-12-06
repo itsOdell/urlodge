@@ -1,6 +1,4 @@
-import NextAuth, { NextAuthOptions, RequestInternal, Session } from "next-auth"
-import type { User } from "@prisma/client"
-// import GoogleProvider from "next-auth/providers/google"
+import NextAuth, { NextAuthOptions, RequestInternal } from "next-auth"
 import bcrypt from "bcryptjs"
 import CredentialsProvider from "next-auth/providers/credentials"
 import {PrismaAdapter} from "@next-auth/prisma-adapter";

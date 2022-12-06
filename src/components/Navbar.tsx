@@ -8,7 +8,6 @@ import {useSession} from "next-auth/react";
 const NavbarComponent: React.FC = (): React.ReactElement => {
     const {data: session} = useSession();
     const defaultImage = <User size="2x"/>
-    const userImage = <img src={String(session?.user?.image)} className={styles.userImage} referrerPolicy="no-referrer"/>
     const linkUrl = session !== null ? "/edit" : "/signin"
     const scroll = useScroll();
     const activated: string = scroll > 5 ? styles.activated : "";
@@ -35,7 +34,7 @@ const NavbarComponent: React.FC = (): React.ReactElement => {
                 <div className={`${styles.nav_right}`}>
                 <Link href={linkUrl} passHref={true}>
                     <a>
-                        {session?.user?.image ? userImage : defaultImage}
+                        {defaultImage}
                     </a>
                 </Link>
                 </div>

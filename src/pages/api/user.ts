@@ -28,7 +28,6 @@ export default async function handler(
     if (req.method === "PUT") {
       try {
         let toUpdate = {...req.body}
-        console.log(userId, req.body)
         let userData = exclude(await updateUser(userId, toUpdate), "password", "emailVerified");
         res.status(200).json(userData);
       } catch (error: any) {

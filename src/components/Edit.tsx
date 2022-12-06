@@ -7,7 +7,7 @@ import LinkComponent from "./Link"
 import type {Link} from "@prisma/client"
 
 const EditComponent: React.FC = (): React.ReactElement => {
-    const {data: session}: any = useSession()
+    const {data: session, status}: any = useSession()
     const userTag = useRef<HTMLInputElement>(null);
     const userBiography = useRef<HTMLInputElement>(null);
     let [userData, setUserData] = useState<Omit<User & {links: Link[]}, "password">>()
@@ -28,8 +28,13 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
         getData()
     }, [session])
-
-
+    
+    if (status === "loading") {
+        return <h1 style={{color: "black"}}>
+            Loading
+        </h1>
+      }
+    
     async function deleteHandler(linkId: string) {
         let url = "/api/link"
         try {
@@ -51,7 +56,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
     async function updateUser() {
         let url = "/api/user"
         try {
-            console.log(userTag.current?.value, userBiography.current?.value)
             let updateRes: User = (await request({
                 method: 'PUT',
                 url: url,
@@ -87,7 +91,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
         }
     }
 
-
     async function addLink() {
         let url = "/api/link"
         try {
@@ -103,7 +106,6 @@ const EditComponent: React.FC = (): React.ReactElement => {
             alert(error.response.data.error)
         }
     }
-
     return (
         <section className={styles.edit}>
                 <div className={styles.input_file_container} onClick={() => addImage("banner")}>
@@ -120,11 +122,11 @@ const EditComponent: React.FC = (): React.ReactElement => {
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="tag">Name</label>
-                        <input type="text" name="tag" id="tag" className={styles.input} defaultValue={String(userData?.tag)} ref={userTag}/>
+                        <input type="text" name="tag" id="tag" className={styles.input} placeholder={String(userData?.tag) || ""} ref={userTag}/>
                     </div>
                     <div className={styles.userInputContainer}>
                         <label htmlFor="bio">Bio</label>
-                        <input type="text" name="bio" id="bio" className={styles.input} defaultValue={String(userData?.biography)} ref={userBiography}/>
+                        <input type="text" name="bio" id="bio" className={styles.input} placeholder={String(userData?.biography) || ""} ref={userBiography}/>
                     </div>
                     <button onClick={updateUser} className={styles.add_link}>Save</button>
                     <button onClick={async () => {await navigator.clipboard.writeText(`${window.location.origin}/${String(userData?.linkTag)}`);alert("copied")}} className={styles.add_link}>Copy Link</button>
