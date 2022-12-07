@@ -20,11 +20,11 @@ const SignUpComponent: React.FC = (): React.ReactElement => {
         e.preventDefault();
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "loading", true)
-        let url = process.env.NEXT_PUBLIC_API_URL;
         try {
-            await request({method: "POST", url: `${url}/user`, data: authCredits})
+            await request({method: "POST", url: `/api/user`, data: authCredits})
             setErrorText("")
             router.push("/signin")
+            window.location.href = "/signin"
         } catch (e: any) {
             console.log(e)
             setErrorText(e.response.data.error)

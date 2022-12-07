@@ -24,9 +24,10 @@ const SignInComponent: React.FC<ProviderProp> = ({providers}): React.ReactElemen
         let buttonCurrent = button.current as HTMLButtonElement
         btnLoadingAnimation(buttonCurrent, "Loading...", true)
         try {
-            console.log(await credSignin(buttonCurrent, authCredits, `${process.env.NEXT_PUBLIC_API_URL}/edit`))
+            console.log(await credSignin(buttonCurrent, authCredits))
             setErrorText("")
             router.push("/edit")
+            window.location.href = "/edit"
         }
         catch(e: any) {
             console.log(e)

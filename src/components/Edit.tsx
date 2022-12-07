@@ -12,7 +12,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
     const userBiography = useRef<HTMLInputElement>(null);
     let [userData, setUserData] = useState<Omit<User & {links: Link[]}, "password">>()
     useEffect(() => {
-        let url = `/api/user/`
+        let url = `/api/user`
         async function getData() {
             try {
                 const res: any = (await request({
@@ -106,6 +106,13 @@ const EditComponent: React.FC = (): React.ReactElement => {
             alert(error.response.data.error)
         }
     }
+
+    async function copyURL(): Promise<void> {
+        const url = `${window.location.origin}/${userData?.linkTag}`
+        await navigator.clipboard.writeText(url);
+        alert("copied");
+    }
+
     return (
         <section className={styles.edit}>
                 <div className={styles.input_file_container} onClick={() => addImage("banner")}>
@@ -129,7 +136,7 @@ const EditComponent: React.FC = (): React.ReactElement => {
                         <input type="text" name="bio" id="bio" className={styles.input} placeholder={String(userData?.biography) || ""} ref={userBiography}/>
                     </div>
                     <button onClick={updateUser} className={styles.add_link}>Save</button>
-                    <button onClick={async () => {await navigator.clipboard.writeText(`${window.location.origin}/${String(userData?.linkTag)}`);alert("copied")}} className={styles.add_link}>Copy Link</button>
+                    <button onClick={copyURL} className={styles.add_link}>Copy Link</button>
                 </div>
                 <div className={styles.linksContainer}>
                 {userData?.links?.map((link: Link) => <LinkComponent {...link} key={link.id} deleteHandler={() => deleteHandler(link.id)}/>)}
